@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat System</title>
+    <style>
+        body { font-family: Arial; }
+        #messages { border: 1px solid #ccc; height: 300px; overflow-y: scroll; margin-bottom: 10px; }
+        input { width: 80%; padding: 10px; }
+        button { width: 18%; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Chat</h1>
+    <div id="messages"></div>
+    <input id="messageInput" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+        const socket = io('http://localhost:3000');
+        const messagesDiv = document.getElementById('messages');
+        const messageInput = document.getElementById('messageInput');
+
+        socket.on('message', (msg) => {
+            const newMessage = document.createElement('div');
+            newMessage.textContent = msg;
+            messagesDiv.appendChild(newMessage);
+        });
+
+        function sendMessage() {
+            const message = messageInput.value;
+            socket.emit('message', message);
+            messageInput.value = '';
+        }
+    </script>
+</body>
+</html>
