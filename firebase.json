@@ -1,1 +1,8 @@
-"site": "msgofc-7b1fd-9e6ff",
+{
+  "hosting": {
+    "site": "msgofc-7b1fd-9e6ff",
+
+    "public": "public",
+    ...
+  }
+}
